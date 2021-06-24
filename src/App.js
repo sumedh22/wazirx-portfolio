@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, {  useState } from 'react';
 import './App.css';
+import FilePicker from './common/FilePicker';
+import Coin from './common/Coin';
+import Investment from './common/Investment';
+import { SHEETS } from './enums';
+import {TickerContextProvider} from './contexts/TickerContext';
+
+
 
 function App() {
+
+  const [data, setData] = useState({});
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TickerContextProvider>
+      <FilePicker onChange={setData}/>
+      <div>
+        <Investment data={data}/>
+      </div>
+      <div>
+        {data[SHEETS.ACCOUNT_BALANCE]?.filter(({Token})=>Token !=='INR').map(({Token})=>Token).map(symbol=><Coin trades={data[SHEETS.EXCHANGE_TRADES]} key={symbol} symbol={symbol}/>)}
+      </div>
+      </TickerContextProvider>
     </div>
   );
 }
