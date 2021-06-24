@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import XLSX from 'xlsx';
 import { SHEETS } from '../enums';
@@ -39,6 +39,15 @@ function parse(worksheet){
     return d;
 }
 function FilePicker({onChange}) {
+
+  useEffect(() => {
+    try{
+      const data = localStorage.getItem('data');
+    if(data) onChange(JSON.parse(data))
+    }catch(e){
+      localStorage.removeItem('data')
+    }
+  }, [onChange]);
     const handleFileUpload = (e) => {
         const file = e.target.files?.[0];
     
@@ -58,6 +67,7 @@ function FilePicker({onChange}) {
                 [SHEETS.ACCOUNT_BALANCE]: parse(workbook.Sheets[SHEETS.ACCOUNT_BALANCE]),
             }
             // console.log(parsedSheets)
+            localStorage.setItem('data', JSON.stringify(parsedSheets));
             onChange(parsedSheets)
           }
         }
