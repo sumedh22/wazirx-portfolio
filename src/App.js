@@ -19,7 +19,7 @@ function App() {
       <div>
         <Investment data={data}/>
       </div>
-      <div>
+      <div className="flex flex-row">
         {data[SHEETS.ACCOUNT_BALANCE]?.filter(({Token})=>Token !=='INR').map(({Token})=>Token).map(symbol=><Coin trades={data[SHEETS.EXCHANGE_TRADES]} key={symbol} symbol={symbol}/>)}
       </div>
       </TickerContextProvider>

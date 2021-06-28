@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import XLSX from 'xlsx';
 import { SHEETS } from '../enums';
 
+const tradingReportUrl = 'https://wazirx.com/settings/trading-report';
+
 function parse(worksheet){
     var headers = {};
     const d = [];
@@ -73,8 +75,9 @@ function FilePicker({onChange}) {
         }
       }
     return (
-        <div>
-            <input value="" type="file" onChange={handleFileUpload} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+        <div >
+          <label htmlFor="file" className="custom-file-upload">Upload trade report</label>
+            <input id="file" value="" type="file" onChange={handleFileUpload} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
         </div>
     )
 }

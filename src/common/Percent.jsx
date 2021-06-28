@@ -12,7 +12,7 @@ export const numberFormatter = new Intl.NumberFormat('en-US', {
 function Percent({value}) {
     if(isNaN(value)) return null
     return (
-        <span className="bold" style={{color: value >= 0 ? 'green':'red'}}>{numberFormatter.format(value)}</span>
+        <span className="bold" style={{color: value >= 0 ? 'green':'red'}}>{`${value >= 0 ? '+':''}${numberFormatter.format(value)}`}</span>
     )
 }
 

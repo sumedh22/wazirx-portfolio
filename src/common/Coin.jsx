@@ -7,14 +7,14 @@ export function sum(trades = [], symbol) {
     return trades.filter(t => t['Market'].indexOf(symbol) === 0).reduce((acc, curr) => {
         acc.totalVolume = acc.totalVolume + (curr['Trade'] === 'Buy'? 1:-1)*curr['Volume'];
         acc.fee[curr['Fee Currency']] = (acc.fee[curr['Fee Currency']] || 0) + curr['Fee'];
-        acc.total[curr['Fee Currency']] = (acc.total[curr['Fee Currency']] || 0) + curr['Total'];
+        acc.total = (acc.total || 0) + curr['Total'];
         return acc;
-    }, { totalVolume: 0, fee: {}, total: {} });
+    }, { totalVolume: 0, fee: {}, total: 0 });
 }
 function Coin({ trades, symbol }) {
     const { totalVolume, fee, total } = sum(trades, symbol);
     const feeArray = Object.keys(fee).map(f=>({value: fee[f], code: f}))
-    const paidArray = Object.keys(total).map(f=>({value: total[f], code: f}))
+    // const paidArray = Object.keys(total).map(f=>({value: total[f], code: f}))
     const live = useTickerContext();
     const [amount, setAmount] = useState(0);
 
@@ -30,9 +30,9 @@ function Coin({ trades, symbol }) {
 
    
     return (
-        <div>
+        <div className="card bgColorPrimary">
             
-            <div><span className="symbol">{symbol}</span><span className="total">{`(${totalVolume} coins / ${numberFormatter.format(amount)})`}</span></div>
+            <div><span className="symbol">{symbol}</span><span className="total">{`(${totalVolume} 💰 / ${numberFormatter.format(total)} /${numberFormatter.format(amount)})`}</span></div>
             <div>
                 <If test={feeArray.length}>
                 <h4>Fees</h4>
@@ -44,13 +44,13 @@ function Coin({ trades, symbol }) {
             
             </div>
             <div>
-            <If test={paidArray.length}>
+            {/* <If test={paidArray.length}>
                 <h4>Paid</h4>
                 {paidArray.map(({code, value}) => <div key={code}>
                     <span>{code}</span> : 
                     <span>{numberFormatWithoutCurrency(value)}</span>
                 </div>)}
-                </If>
+                </If> */}
             </div>
         </div>
     )

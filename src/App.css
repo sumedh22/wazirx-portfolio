@@ -1,17 +1,83 @@
+:root {
+  --color-primary: #654cec;
+  --color-secondary: #ecc391;
+  --color-neutral-1: #eccca478;
+  --color-text-secondary: #00000080;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --font-weight-bolder: 800;
+}
+
 .App {
   text-align: center;
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--color-neutral-1);
 }
 
 .symbol {
-  font-size: large;
-  font-weight: bolder;
+  font-weight: var(--font-weight-bolder);
 }
 
 .total {
   font-size: medium;
-  font-weight: normal;
+  font-weight: var(--font-weight-normal);
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: var(--font-weight-bolder);
+  font-size: 2rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.card {
+  margin: 2rem;
+  box-shadow: 6px 6px 59px -5px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 6px 6px 59px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 6px 59px -5px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: transform 0.3s ease-out;
+}
+
+.card:hover {
+  transform: translate(0, -5px);
+}
+
+.bgColorPrimary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.bgColorSecondary {
+  background-color: var(--color-secondary);
+}
+
+.label {
+  font-size: 1.2rem;
+  padding-right: 1rem;
+  font-weight: var(--font-weight-bolder);
+  color: var(--color-text-secondary);
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #fff7ec05;
 }

@@ -10,10 +10,10 @@ export const numberFormatter = new Intl.NumberFormat('en-US', {
   });
 
 export const numberFormatWithoutCurrency = val => numberFormatter.format(val).toString().substr(1)
-function Number({value}) {
+function Number({value, color}) {
     if(isNaN(value)) return null
     return (
-        <span className="bold">
+        <span className="bold" style={{color}}>
             {numberFormatter.format(value ||0)}
         </span>
     )
