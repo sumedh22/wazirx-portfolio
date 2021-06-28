@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import XLSX from 'xlsx';
 import { SHEETS } from '../enums';
 
-const tradingReportUrl = 'https://wazirx.com/settings/trading-report';
+// const tradingReportUrl = 'https://wazirx.com/settings/trading-report';
 
 function parse(worksheet){
     var headers = {};
